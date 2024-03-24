@@ -1,16 +1,21 @@
 import React from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import { getHeroById } from '../../selectors/getHeroById';
 
 export const HeroeScreen = () => {
   const {heroeId} = useParams();
  const hero = getHeroById ( heroeId );
+ const navigate = useNavigate();
 
  if  ( !hero ){
   return <Navigate to =" / "/>;
  }
+
+ const handleReturn = () => {
+  navigate(-1); 
+};
+
 const {
-        
         superhero,
         publisher,
         alter_ego,
@@ -38,7 +43,10 @@ const {
 
         <h5> characters </h5>
         <p> { characters }</p>
-        <button className="btn btn-outline-info">
+        <button 
+        className="btn btn-outline-info"
+        onClick={ handleReturn}
+        >
           Return
         </button>
 

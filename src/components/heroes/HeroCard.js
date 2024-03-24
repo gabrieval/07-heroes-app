@@ -32,7 +32,7 @@ characters,
                         }
 
                     <p className="card-text">
-                        <small className="text-muted"> { first_appearance } </small>
+                        <small className="text-muted"> {first_appearance } </small>
 
                     </p>
                     <Link to={`/hero/${id}`}>
