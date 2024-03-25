@@ -12,7 +12,8 @@ export const SearchScreen = () => {
   } );
   const { searchText } = formValues;
 
-  const handleSearch = () =>{
+  const handleSearch = (e) =>{
+    e.preventDefault();
 console.log( searchText );
   }
 
@@ -30,6 +31,7 @@ console.log( searchText );
               placeholder="Find your hero"
               className="form-control"
               name="searchText"
+              autoComplete= "off"
               value={ searchText }
               onChange= { handleInputChange }
             />
