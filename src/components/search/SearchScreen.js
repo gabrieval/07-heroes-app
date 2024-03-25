@@ -4,6 +4,9 @@ import { HeroCard } from "../heroes/HeroCard";
 
 export const SearchScreen = () => {
   const heroesFiltered = heroes;
+  const handleSearch = () =>{
+console.log(' ');
+  }
 
   return (
     <div>
@@ -13,7 +16,7 @@ export const SearchScreen = () => {
         <div className="col-5">
           <h4> Search Form</h4>
           <hr />
-          <form>
+          <form onSubmit = { handleSearch }>
             <input
               type="text"
               placeholder="Find your hero"
