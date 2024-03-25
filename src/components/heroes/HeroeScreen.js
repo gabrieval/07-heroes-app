@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import { getHeroById } from '../../selectors/getHeroById';
 
 export const HeroeScreen = () => {
   const {heroeId} = useParams();
- const hero = getHeroById ( heroeId );
+   
+  const hero = useMemo (()=> getHeroById ( heroeId ), [heroeId]);
+//  const hero = getHeroById ( heroeId );
  const navigate = useNavigate();
 
  if  ( !hero ){
@@ -12,7 +14,14 @@ export const HeroeScreen = () => {
  }
 
  const handleReturn = () => {
-  navigate(-1); 
+
+  if (navigate.length <2){
+
+    navigate.push ('/');
+  }else{
+    navigate(-1); 
+  }
+
 };
 
 const {
@@ -28,11 +37,11 @@ const {
       <div className="col-4">
         <img src={`../../../assets/heroes/${ heroeId  }.jpg`}
         alt={ superhero }
-        className="img-thumbnail"
+        className="img-thumbnail animate__animated animate__fadeInLeft"
         /> 
      
       </div>
-      <div className="col-8">
+      <div className="col-8 animate__animated animate__fadeInRight">
         <h3>{ superhero }</h3>
         <ul className="list-group list-group-flush">
 
