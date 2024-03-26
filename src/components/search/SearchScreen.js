@@ -1,28 +1,24 @@
-import React from "react";
-
-import queryString from 'query-string';
-import { heroes } from "../../data/heroes";
+import React, { useMemo } from "react";
+import queryString from "query-string";
 import { HeroCard } from "../heroes/HeroCard";
 import { useForm } from "../../hooks/useForm";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getHeroesByName } from "../../selectors/getHeroesByName";
 
 export const SearchScreen = () => {
-const location = useLocation ();
-
-const {q = ''} = queryString.parse(location.search);
-
-
-  const heroesFiltered = heroes;
-  const navigate = useNavigate(); // Obtener la función de navegación
-
+  const location = useLocation();
+  const { q = "" } = queryString.parse(location.search);
   const [formValues, handleInputChange] = useForm({
-    searchText: q
+    searchText: q,
   });
   const { searchText } = formValues;
+  const heroesFiltered = useMemo(() => getHeroesByName(q), [q]);
+
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`?query=${searchText}`); // Navegar a la ruta con el query string
+    navigate(`?q=${searchText}`);
   };
 
   return (
@@ -54,6 +50,12 @@ const {q = ''} = queryString.parse(location.search);
         <div className="col-7">
           <h4>Results</h4>
           <hr />
+          {(q === "") && <div className="alert alert-info">Search a hero</div>}
+
+          {(q !== "" && heroesFiltered.length === 0) && 
+            <div className="alert alert-danger">There is no a hero with {q}</div>
+          }
+
           {heroesFiltered.map((hero) => (
             <HeroCard key={hero.id} {...hero} />
           ))}
