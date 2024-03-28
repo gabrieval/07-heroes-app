@@ -17,7 +17,8 @@ export const DashboardRoutes = () => {
                 <Route path="/dc" element={<DcScreen />} />
                 <Route path="/search" element={<SearchScreen />} />
 
-                <Route  path="*" element={<Navigate to="/" />} />
+                <Route  path="*" element={<Navigate to="/marvel" />} /> 
+                 {/* la ruta por default  */}
             </Routes>
         </div>
     </div>
