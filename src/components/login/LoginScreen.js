@@ -11,13 +11,16 @@ export const LoginScreen = () => {
   const handleLogin = () => { 
     // history.push (' / ');
     
+    navigate('/');
+
+    
     dispatch ({
       type: types.login,
       payload: {
         name: 'Gabriela'
       }
     }); 
-    navigate('/');
+    
   };
   
 
