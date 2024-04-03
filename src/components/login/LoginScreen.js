@@ -9,9 +9,9 @@ export const LoginScreen = () => {
   const  {dispatch} = useContext (AuthContext);
 
   const handleLogin = () => { 
-    // history.push (' / ');
     
-    navigate('/');
+    
+    const lastPath = localStorage.getItem('lastPath') || '/';
 
     
     dispatch ({
@@ -20,6 +20,7 @@ export const LoginScreen = () => {
         name: 'Gabriela'
       }
     }); 
+    navigate( lastPath );
     
   };
   
